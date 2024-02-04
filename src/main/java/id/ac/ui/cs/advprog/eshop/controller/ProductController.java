@@ -38,9 +38,7 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String editProductPage(@PathVariable("id") String id, Model model) {
-        System.out.println("ini id: " + id);
         Product product = service.getProduct(id);
-//        System.out.println(product.toString());
         model.addAttribute("product", product);
         return "editProduct";
     }
@@ -49,6 +47,5 @@ public class ProductController {
     @ResponseBody
     public void editProductPost(@PathVariable("id") String id, @RequestBody Product updatedProduct, Model model) {
         service.edit(id, updatedProduct);
-//        return "redirect:../list";
     }
 }
