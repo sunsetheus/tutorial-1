@@ -26,4 +26,12 @@ public class ProductRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Product edit(String id, Product product) {
+        Product updatedProduct = getProduct(id);
+        updatedProduct.setProductName(product.getProductName());
+        updatedProduct.setProductQuantity(product.getProductQuantity());
+
+        return updatedProduct;
+    }
 }

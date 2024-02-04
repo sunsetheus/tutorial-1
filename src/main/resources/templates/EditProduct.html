@@ -9,8 +9,9 @@
 
 <div class="container">
     <h3>Edit Product</h3>
+    <h3 th:text="${product.productId}"></h3>
 
-    <form th:action="@{/product/edit/${product.productId}}" th:object="${product}" method="put">
+    <form th:object="${product}" id="editForm">
         <div class="form-group">
             <label for="nameInput">Name</label>
             <input type="text" class="form-control mb-4 col-4" id="nameInput" th:placeholder="${product.productName}">
@@ -19,10 +20,40 @@
             <label for="quantityInput">Quantity</label>
             <input type="text" class="form-control mb-4 col-4" id="quantityInput" th:placeholder="${product.productQuantity}">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-primary btn-sm mb-3" onclick="updateProduct()">Update</a>
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script th:inline="javascript">
+    async function updateProduct(){
+        var updatedProduct = {
+            productName: document.getElementById("nameInput").value,
+            productQuantity: document.getElementById("quantityInput").value
+        };
+
+        try{
+            var id = /*[[${product.productId}]]*/ '';
+            console.log(id);
+            const response = await fetch(`/product/edit/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedProduct)
+            });
+
+            if (response.ok) {
+                window.location.href = '../list'
+            } else {
+                console.error('Error updating product!');
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+</script>
+
 </body>
 </html>

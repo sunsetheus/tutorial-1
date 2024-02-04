@@ -40,13 +40,15 @@ public class ProductController {
     public String editProductPage(@PathVariable("id") String id, Model model) {
         System.out.println("ini id: " + id);
         Product product = service.getProduct(id);
-        System.out.println(product.toString());
+//        System.out.println(product.toString());
         model.addAttribute("product", product);
         return "editProduct";
     }
 
     @PutMapping("/edit/{id}")
-    public String editProductPut(@ModelAttribute Product product, Model model) {
-        return "redirect:list";
+    @ResponseBody
+    public void editProductPost(@PathVariable("id") String id, @RequestBody Product updatedProduct, Model model) {
+        service.edit(id, updatedProduct);
+//        return "redirect:../list";
     }
 }

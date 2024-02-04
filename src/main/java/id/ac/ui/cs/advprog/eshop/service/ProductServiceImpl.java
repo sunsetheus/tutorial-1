@@ -33,4 +33,9 @@ public class ProductServiceImpl implements ProductService {
     public Product getProduct(String id) {
         return productRepository.getProduct(id);
     }
+
+    @Override
+    public Product edit(String id, Product product){
+        return productRepository.edit(id, product);
+    }
 }
