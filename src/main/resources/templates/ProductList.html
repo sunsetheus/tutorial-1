@@ -25,7 +25,7 @@
             <td th:text="${iStat.count}"></td>
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
-            <td><a th:href="@{/product/edit/${product.productId}}" class="btn btn-success btn-sm mb-3">Edit</a></td>
+            <td><a th:href="@{/product/edit/{id}(id=${product.productId})}" class="btn btn-success btn-sm mb-3">Edit</a></td>
         </tr>
         </tbody>
     </table>

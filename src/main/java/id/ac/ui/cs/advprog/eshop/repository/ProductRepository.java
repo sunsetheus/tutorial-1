@@ -22,7 +22,7 @@ public class ProductRepository {
 
     public Product getProduct(String id) {
         return productData.stream()
-                .filter(product -> product.getProductId().equals(id))
+                .filter(t -> t.getProductId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
