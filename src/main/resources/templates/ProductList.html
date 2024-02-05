@@ -37,7 +37,6 @@
 
 <script th:inline="javascript">
     async function deleteProduct(id){
-        console.log(id);
         try{
             const response = await fetch(`/product/delete/${id}`, {
             method: 'DELETE',
@@ -47,10 +46,8 @@
         });
 
             if (response.ok) {
-                console.log(response);
                 location.reload()
             } else {
-                console.error(response);
                 console.error('Error deleting product!');
             }
         } catch (err) {

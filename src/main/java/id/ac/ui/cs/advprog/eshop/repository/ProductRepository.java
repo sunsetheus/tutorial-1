@@ -30,7 +30,6 @@ public class ProductRepository {
     }
 
     public Product delete(String id) {
-        System.out.println("ini id yang dipass: " + id);
         Product product = get(id);
         productData.remove(product);
         return product;
