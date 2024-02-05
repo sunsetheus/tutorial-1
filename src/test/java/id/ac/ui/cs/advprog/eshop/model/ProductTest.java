@@ -27,4 +27,10 @@ class ProductTest {
     void testGetProductQuantity() {
         assertEquals(100, this.product.getProductQuantity());
     }
+
+    @Test
+    void testSetNegativeProductQuantity() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> this.product.setProductQuantity(-10));
+        assertEquals("Product quantity must be positive integer", exception.getMessage());
+    }
 }
