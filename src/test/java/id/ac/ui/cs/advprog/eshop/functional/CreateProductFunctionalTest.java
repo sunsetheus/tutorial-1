@@ -57,8 +57,8 @@ public class CreateProductFunctionalTest {
         String pageTitle = driver.getTitle();
         assertEquals("ADV: Product List", pageTitle);
 
-        WebElement productNameDisplay = driver.findElement(By.xpath("//tbody/tr[1]/td[1]"));
-        WebElement productQuantityDisplay = driver.findElement(By.xpath("//tbody/tr[1]/td[2]"));
+        WebElement productNameDisplay = driver.findElement(By.xpath("//tbody/tr[1]/td[2]"));
+        WebElement productQuantityDisplay = driver.findElement(By.xpath("//tbody/tr[1]/td[3]"));
 
         assertEquals(productName, productNameDisplay.getText());
         assertEquals("100", productQuantityDisplay.getText());
