@@ -30,8 +30,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product get(String id) {
+        return productRepository.get(id);
+    }
+
+    @Override
+    public Product delete(String id) {
+        return productRepository.delete(id);
+    }
+
     public Product getProduct(String id) {
-        return productRepository.getProduct(id);
+        return productRepository.get(id);
     }
 
     @Override

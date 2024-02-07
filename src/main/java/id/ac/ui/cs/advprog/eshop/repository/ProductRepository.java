@@ -23,15 +23,22 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product getProduct(String id) {
+    public Product get(String id) {
         return productData.stream()
                 .filter(t -> t.getProductId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
+
+    public Product delete(String id) {
+        Product product = get(id);
+        productData.remove(product);
+        return product;
+    }
+
     public Product edit(String id, Product product) {
-        Product updatedProduct = getProduct(id);
+        Product updatedProduct = get(id);
         updatedProduct.setProductName(product.getProductName());
         updatedProduct.setProductQuantity(product.getProductQuantity());
 
