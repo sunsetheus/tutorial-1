@@ -19,6 +19,7 @@ public class ProductRepository {
     }
 
     public Iterator<Product> findAll() {
+
         return productData.iterator();
     }
 
@@ -29,9 +30,18 @@ public class ProductRepository {
                 .orElse(null);
     }
 
+
     public Product delete(String id) {
         Product product = get(id);
         productData.remove(product);
         return product;
+    }
+
+    public Product edit(String id, Product product) {
+        Product updatedProduct = get(id);
+        updatedProduct.setProductName(product.getProductName());
+        updatedProduct.setProductQuantity(product.getProductQuantity());
+
+        return updatedProduct;
     }
 }

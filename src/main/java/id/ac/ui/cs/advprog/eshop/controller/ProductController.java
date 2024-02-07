@@ -38,10 +38,24 @@ public class ProductController {
         return "productList";
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable String id) {
         Product product = service.get(id);
         service.delete(id);
         return ResponseEntity.ok("Product deleted successfully");
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable("id") String id, Model model) {
+        Product product = service.get(id);
+        model.addAttribute("product", product);
+        return "editProduct";
+    }
+
+    @PutMapping("/edit/{id}")
+    @ResponseBody
+    public void editProductPost(@PathVariable("id") String id, @RequestBody Product updatedProduct, Model model) {
+        service.edit(id, updatedProduct);
     }
 }
