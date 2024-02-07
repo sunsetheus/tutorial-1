@@ -4,6 +4,11 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.4"
 }
 
+val seleniumJavaVersion = "4.14.1"
+val seleniumJupiterVersion = "5.0.1"
+val webdrivermanagerVersion = "5.6.3"
+val junitJupiterVersion = "5.9.1"
+
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
 
@@ -21,11 +26,6 @@ repositories {
 	mavenCentral()
 }
 
-val seleniumJavaVersion = "4.14.1"
-val seleniumJupiterVersion = "5.0.1"
-val webdrivermanagerVersion = "5.6.3"
-val junitJupiterVersion = "5.9.1"
-
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -41,24 +41,22 @@ dependencies {
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
 
-tasks.withType<Test> {
-	description = "Runs unit tests."
+tasks.register<Test>("unitTest") {
+	description = "Run unit tests"
 	group = "verification"
-
 	filter {
 		excludeTestsMatching("*FunctionalTest")
 	}
 }
 
 tasks.register<Test>("functionalTest") {
-	description = "Runs functional tests."
-    group = "verification"
-
-    filter {
-        includeTestsMatching("*FunctionalTest")
-    }
+	description = "Run functional tests"
+	group = "verification"
+	filter {
+		includeTestsMatching("*FunctionalTest")
+	}
 }
 
 tasks.withType<Test>().configureEach {
-	useJUnitPlatform();
+	useJUnitPlatform()
 }
