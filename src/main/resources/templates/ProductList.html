@@ -23,7 +23,7 @@
         <tbody>
         <tr th:each="product, iStat: ${products}">
             <td th:text="${iStat.count}"></td>
-            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productId}"></td>
             <td th:text="${product.productQuantity}"></td>
             <td>
                 <a th:href="@{/product/edit/{id}(id=${product.productId})}" class="btn btn-success btn-sm mr-2">Edit</a>
