@@ -72,4 +72,9 @@ tasks.test {
 
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
+
+	reports {
+		html.required = true
+		xml.required = true
+	}
 }
