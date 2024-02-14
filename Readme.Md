@@ -1,6 +1,9 @@
 # TUTORIAL ADPRO
 ### William - 2206083432
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sunsetheus_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sunsetheus_tutorial-1)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sunsetheus_tutorial-1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=sunsetheus_tutorial-1)
 
+[Link website hasil deploy](https://eshop-sunsetheus-eshop.koyeb.app/)
 ## Reflection 1
 <br>
 You already implemented two new features using Spring Boot. Check again your source code and evaluate the coding standards that you have learned in this module. Write clean code principles and secure coding practices that have been applied to your code.  If you find any mistake in your source code, please explain how to improve your code.
@@ -31,3 +34,19 @@ Penambahan tes fungsional baru dapat menurunkan kualitas dari kode tersebut dan 
 2. `Ketergantungan atar tes`, jika terdapat kertengantungan antar tes, maka perubahan pada tes lain dapat menimbulkan penyesuaian pada tes lain. Hal ini mengakibatkan kode menjadi lebih kurang maintainable.
 
 Solusi untuk mengatas hal tersebut antara lain, penggunaan setUp bersama sehingga kode-kode yang repetitif dapat teratasi lebih baik. Selain itu, perlu juga adanya pemisahan ketergantungan sehingga perubahan atau penambahan kode tidak membuat kode lama harus di-maintain secara menyeluruh, seperti penggunaan class yang tepisah pada code yang tidak bergantung.
+
+
+# WEEK 2
+## Refelection 4.2
+List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
+Code quality issue yang saya perbaiki selama mengerjakan modul, di antaranya:
+- Import yang tidak diperlukan, strategi saya dalam memperbaikinya hanya dengan menghapusnya karena memang tidak digunakan. Terjadi auto import ketika saya mencoba beberapa metode dan ternyata tidak jadi saya gunakan, namun tidak saya hapus.
+- Variabel yang tidak digunakan, alasannya sama dengan masalah import. Strateginya adalah dengan menghapusnya saja.
+- Penggunaan public modifier, saya sempat membaca "why is this an issue?" pada sonarcloud dan ternyata JUnit5 memang lebih toleran terhadap visibility sehingga lebih aman jika dibuat tidak public (hapus visibility publicnya)
+- No assertion in a test, sesuai dengan namanya, solusinya adalah memastikan setiao test ada assertionnya sehingga test yang dijalankan lebih berarti
+  dan sebagainya.
+
+Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
+<br>
+<br>
+Menurut saya, implementasi yang saya lakukan terkait CI/CD sudah cukup sesuai dan memnuhi definisinya CI/CD. Implementasi CI telah membuat project saya lebih terjaga integrasinya sehingga tidak rawan rusak ketima melakukan merge/pull, selain itu terdapat pengecekan code quality issues dengan bantuan sonarcloud sehingga menjaga maintainability. Imolementasi CD, saya menggunakan Koyeb sebagai PaaS saya dan sudah diset hanya melakukan redeployment ketika terjadi perubahan pada main, CI/CD skala project kecil sudah diterapkan pada project ini sehingga mengurangi waktu maintain.
