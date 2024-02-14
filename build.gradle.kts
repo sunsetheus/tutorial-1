@@ -8,7 +8,7 @@ plugins {
 
 sonar {
 	properties {
-		property("sonar.projectKey", "sunsetheus-adpro")
+		property("sonar.projectKey", "sunsetheus_tutorial-1")
 		property("sonar.organization", "sunsetheu5")
 		property("sonar.host.url", "https://sonarcloud.io")
 	}
