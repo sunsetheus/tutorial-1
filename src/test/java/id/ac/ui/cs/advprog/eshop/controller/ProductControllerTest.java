@@ -53,8 +53,6 @@ public class ProductControllerTest {
 
         when(service.create(product)).thenReturn(product);
 
-        System.out.println("ini print: " + product);
-
         mvc.perform(post("/product/create")
                         .flashAttr("product", product))
                 .andExpect(status().is3xxRedirection())
@@ -70,10 +68,13 @@ public class ProductControllerTest {
         when(service.get("1")).thenReturn(product);
         when(service.edit(eq("1"), any(Product.class))).thenReturn(new Product("1", "Updated Album", 200));
 
+        mvc.perform(post("/product/create")
+                .flashAttr("product", product));
         mvc.perform(get("/product/edit/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("EditProduct"));
 
+        System.out.println("ini debug: " + product.getProductId());
         mvc.perform(put("/product/edit/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":\"1\",\"name\":\"Updated Album\",\"quantity\":200}"))
