@@ -9,16 +9,15 @@
 
 <div class="container">
     <h3>Edit Product</h3>
-    <h3 th:text="${product.productId}"></h3>
 
     <form th:object="${product}" id="editForm">
         <div class="form-group">
             <label for="nameInput">Name</label>
-            <input type="text" class="form-control mb-4 col-4" id="nameInput" th:placeholder="${product.productName}" required>
+            <input th:field="*{productName}" type="text" class="form-control mb-4 col-4" id="nameInput" th:placeholder="${product.productName}" required>
         </div>
         <div class="form-group">
             <label for="quantityInput">Quantity</label>
-            <input type="number" class="form-control mb-4 col-4" id="quantityInput" th:placeholder="${product.productQuantity}" min="1" required>
+            <input th:field="*{productQuantity}" type="number" class="form-control mb-4 col-4" id="quantityInput" th:placeholder="${product.productQuantity}" min="1" required>
         </div>
         <a class="btn btn-primary btn-sm mb-3" onclick="updateProduct()">Update</a>
     </form>
