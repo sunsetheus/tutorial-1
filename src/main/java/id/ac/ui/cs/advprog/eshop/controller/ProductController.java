@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/product")
 public class ProductController {
 
@@ -57,7 +57,6 @@ public class ProductController {
     }
 
     @PutMapping("/edit/{id}")
-    @ResponseBody
     public void editProductPost(@PathVariable("id") String id, @RequestBody Product updatedProduct, Model model) {
         service.edit(id, updatedProduct);
     }
