@@ -67,7 +67,7 @@ public class ProductController {
 
 @Controller
 @RequestMapping("/car")
-class CarController extends ProductController {
+class CarController extends ProductController{
     @Autowired
     private CarServiceImpl carService;
 
@@ -76,40 +76,41 @@ class CarController extends ProductController {
     }
 
     @GetMapping("/createCar")
-    public String createCarPage(Model model) {
+    public String createCarPage(Model model){
         Car car = new Car();
-        model.addAttribute("car", car);
+        model.addAttribute("car",car);
         return "CreateCar";
     }
 
+    @GetMapping("/listCar")
+    public String carListPage(Model model){
+        List<Car> allCars = carService.findAll();
+        model.addAttribute("cars",allCars);
+        return "CarList";
+    }
+
     @PostMapping("/createCar")
-    public String createCarPost(@ModelAttribute Car car, Model model) {
+    public String createCarPost(@ModelAttribute Car car, Model model){
         carService.create(car);
         return "redirect:listCar";
     }
 
-    @GetMapping("/listCar")
-    public String carListPage(Model model) {
-        List<Car> allCars = carService.findAll();
-        model.addAttribute("cars", allCars);
-        return "CarList";
-    }
-
     @GetMapping("/editCar/{carId}")
-    public String editCarPage(@PathVariable String carId, Model model) {
-        Car car = carService.findById(carId);
-        model.addAttribute("car", car);
+    public String editCarPage(@PathVariable String carId, Model model){
+        Car car  = carService.findById(carId);
+        model.addAttribute("car",car);
         return "EditCar";
     }
 
     @PostMapping("/editCar")
-    public String editCarPost(@ModelAttribute Car car, Model model) {
-        carService.update(car.getCarId(), car);
+    public String editCarPost(@ModelAttribute Car car, Model model){
+        System.out.println(car.getCarId());
+        carService.update(car.getCarId(),car);
         return "redirect:listCar";
     }
 
     @PostMapping("/deleteCar")
-    public String deleteCar(@RequestParam("carId") String carId) {
+    public String deleteCar(@RequestParam("carId") String carId){
         carService.deleteCarById(carId);
         return "redirect:listCar";
     }
