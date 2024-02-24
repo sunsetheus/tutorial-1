@@ -50,3 +50,31 @@ Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the curre
 <br>
 <br>
 Menurut saya, implementasi yang saya lakukan terkait CI/CD sudah cukup sesuai dan memnuhi definisinya CI/CD. Implementasi CI telah membuat project saya lebih terjaga integrasinya sehingga tidak rawan rusak ketima melakukan merge/pull. Selain itu terdapat pengecekan code quality issues dengan bantuan sonarcloud sehingga menjaga maintainability. Imolementasi CD, saya menggunakan Koyeb sebagai PaaS saya dan sudah diset hanya melakukan redeployment ketika terjadi perubahan pada main. Maka dari itu CI/CD skala project kecil sudah diterapkan pada project ini dan telah mengurangi waktu maintain.
+
+
+# WEEK 3
+Prinsip SOLID yang saya terapkan pada proyek saya meliputi
+1. SRP (Single Responsibility Principle), dengan memisahkan ProductController dengan CarController karena keduanya melakukan kontrol yang berbeda. Class ProductController melakukan mapping pada Product, sedangkan Class CarController melakukan mapping pada Car.
+
+2. OCP (Open Close Principle), dengan memastikan class yang dibuat (contoh Model) dapat dilakukan ekstensi (penambahan method yang tidak dimiliki parent-nya), tetapi tertutup pada modifikasi (mengubah yang sudah ditentukan oleh parent).
+
+3. ISP (Interface Segregation Principle), dengan membuat interface seminimal (seumum) mungkin sehingga ketika mengimplementasi interface tersebut, developer tidak perlu mengimplementasi behave yang tidak relevant. Saya menerapkannya pada interface service yang hanya melakukan yang sudah menjadi "minimal" dalam implementasi katalog.
+
+4. DIP (Depedency Inversion Principle), dengan mengubah depedensi pada class CarController yang awalnya menggunakan CarServiceImpl (bentuk konkrit) menjadi CarService (bentuk interface).
+
+Keuntungan pengaplikasian prinsip SOLID
+1. Kemudahan dalam pemeliharaan code (maintain). Ketika kita sudah melakukan minimalisasi code untuk setiap class (hanya melakukan 1 pekerjaan), kita akan lebih mudah melakukan pemeliharaannya. Contoh nyatanya adalah ketika terjadi bug pada fitur X, akan lebih mudah ketika kita sebelumnya sudah memisahkan implementasi fitur X, Y, Z sehingga kita tahu bahwa yang perlu di-fix adalah code di fitur Y. Akan tetapi, jika kita menggabungkan semuanya menjadi 1 folder, akan jauh lebih susah melakukan tracking code, apalagi jika sudah project skala besar yang tentunya sudah ada ratusan fungsi yang melakukan hal yang berbeda. (contohnya pemisahan controller milik product dan car)
+
+2. Lebih mudah dipahami oleh orang lain karena code tidak menumpuk di satu bagian dengan fungsionalitasnya masing-masing. Dengan adanya pemisahan yang sepsifik, pembaca akan lebih mudah tahu bagian mana melakukan apa, terluhat lebih terstruktur, dan cepat dalam memahami keseluruhan code. (contohnya pemisahan controller product dan car, saya jadih lebih cepat mencari controller car karena sudah independen dan terpisah, jadi tidak perlu track dari file yang seharusnya tidak perlu saya buka).
+
+3. Dengan membuat interface seminimal mungkin, saya hanya perlu memgimpelemntasikan fungsi yang saya benar-benar pasti gunakan. Jika saya membuat interface service car yang sangat spesifik (seperti ada fungsi mendapatkan mobil warna kuning, fungsi mencari nama mobil berawalan huruf W, fungsi melakukan penghapusan semua mobil, dsb yang sebenarnya belum tentu akan selalu saya gunakan untuk setiap implementasi service car. Maka akan lebih sulit dalam mengimpleemntasikan interface tersebut karena saya harus override suatu hal yang saya tidak gunakan, dengan memastikan interface seminimal mungkin, lebih mudah impleemntasi interfacenya.
+
+
+
+Kerugian tidak mengimplementasikan SOLID
+1. Sulit melakukan maintain. Ketika kita tidak melakukan minimalisasi code untuk setiap class (tidak melakukan 1 pekerjaan), kita akan lebih sulit melakukan pemeliharaannya. Contoh nyatanya adalah ketika terjadi bug pada fitur X, akan lebih sulit ketika kita harus mencari pada suatu file yang berisi fitur A, B, C, ..., Z, hal tersebut juga berpotensi terjadinya proses fix yang salah (implementasi yang tertukar dan sebagainya). Dengan menggabungkan semuanya menjadi 1 folder, akan jauh lebih susah melakukan tracking code, apalagi jika sudah project skala besar yang tentunya sudah ada ratusan fungsi yang melakukan hal yang berbeda.
+
+
+2. Sulit dipahami oleh orang lain karena code menumpuk di satu bagian dengan fungsionalitasnya masing-masing. Dengan tidak adanya pemisahan yang sepsifik, pembaca akan lebih sulit tahu bagian mana melakukan apa, terlihat lebih berantakan, dan lebih lama dalam memahami keseluruhan code.
+
+3. Dengan tidak membuat interface seminimal mungkin, saya harus memgimpelemntasikan fungsi yang tidak benar-benar saya gunakan. Jika saya membuat interface service car yang sangat spesifik (seperti ada fungsi mendapatkan mobil warna kuning, fungsi mencari nama mobil berawalan huruf W, fungsi melakukan penghapusan semua mobil, dsb yang sebenarnya belum tentu akan selalu saya gunakan untuk setiap implementasi service car. Maka akan lebih sulit dalam mengimpleemntasikan interface tersebut karena saya harus override suatu hal yang saya tidak gunakan.
