@@ -5,6 +5,7 @@ import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
+import id.ac.ui.cs.advprog.eshop.model.PaymentBank;
 import id.ac.ui.cs.advprog.eshop.model.PaymentVoucher;
 import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class PaymentServiceImpl implements PaymentService{
         Payment payment;
         if (method.equals(PaymentMethod.VOUCHER.getValue())){
             payment = createPaymentVoucher(order, method, paymentData);
-        }else{
+        }
+        else if (method.equals(PaymentMethod.BANK.getValue())){
+            payment = createPaymentBank(order, method, paymentData);
+        }
+        else{
             payment = new Payment(order, method, paymentData);
         }
         return paymentRepository.save(payment);
@@ -52,5 +57,7 @@ public class PaymentServiceImpl implements PaymentService{
     public Payment createPaymentVoucher(Order order, String method, Map<String, String>paymentData){
         return new PaymentVoucher(order,method,paymentData);
     }
-
+    public Payment createPaymentBank(Order order, String method, Map<String, String>paymentData){
+        return new PaymentBank(order,method,paymentData);
+    }
 }
