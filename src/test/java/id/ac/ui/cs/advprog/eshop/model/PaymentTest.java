@@ -33,9 +33,9 @@ public class PaymentTest {
 
         this.orders = new ArrayList<>();
 
-        Order order1 = new Order("ini-ceritanya-id-1", products ,10L, "Lana");
-        Order order2 = new Order("ini-ceritanya-id-2", products ,20L, "Del");
-        Order order3 = new Order("ini-ceritanya-id-3", products ,30L, "Rey");
+        Order order1 = new Order("bbbbaaaa-4a37-4664-83c7-f32db8620155", products ,100L, "Budi");
+        Order order2 = new Order("aaaabbbb-4a37-4664-83c7-f32db8620155", products ,100L, "Budi");
+        Order order3 = new Order("ccccbbbb-4a37-4664-83c7-f32db8620155", products ,100L, "Andi");
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
@@ -44,57 +44,29 @@ public class PaymentTest {
     void testCreatePaymentSucessfulVoucher(){
         Map<String, String> paymentDataVoucher = new  HashMap<>();
         paymentDataVoucher.put("voucherCode", "ESHOP00000000AAA");
-        Payment payment1 = new Payment("ini-ceritanya-id-1",orders.get(1),
-                "VOUCHER", paymentDataVoucher);
+        Payment payment1 = new Payment("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",orders.get(1),
+                "", paymentDataVoucher);
         assertSame(this.orders.get(1), payment1.getOrder());
-        assertEquals(paymentDataVoucher, payment1.getPaymentData());
-        assertEquals("ini-ceritanya-id-1", payment1.getId());
-        assertEquals("VOUCHER", payment1.getMethod());
+        assertNull(payment1.getPaymentData());
+        assertEquals("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", payment1.getId());
+        assertEquals("", payment1.getMethod());
     }
 
     @Test
-    void testCreatePaymentVoucherFail16Length(){
+    void testCreatePaymentIsVoucherFail(){
         Map<String, String> paymentDataVoucher = new  HashMap<>();
-        paymentDataVoucher.put("voucherCode", "INIKODE");
-        assertThrows(IllegalArgumentException.class, ()-> {new Payment("ini-ceritanya-id-1",orders.get(1),
+        paymentDataVoucher.put("voucherCode", "ESHOP00000000AAA");
+        assertThrows(IllegalArgumentException.class, ()-> {new Payment("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",orders.get(1),
                 "VOUCHER", paymentDataVoucher);
         });
     }
 
     @Test
-    void testCreatePaymentVoucherFailESHOPStart(){
-        Map<String, String> paymentDataVoucher = new  HashMap<>();
-        paymentDataVoucher.put("voucherCode", "INIKODEE");
-        assertThrows(IllegalArgumentException.class, ()-> {new Payment("ini-ceritanya-id-1",orders.get(1),
-                "VOUCHER", paymentDataVoucher);
-        });
-    }
-
-    @Test
-    void testCreatePaymentVoucherFail8Numerical(){
-        Map<String, String> paymentDataVoucher = new  HashMap<>();
-        paymentDataVoucher.put("voucherCode", "INIKODEEE");
-        assertThrows(IllegalArgumentException.class, ()-> {new Payment("ini-ceritanya-id-1",orders.get(1),
-                "VOUCHER", paymentDataVoucher);
-        });
-    }
-
-    @Test
-    void testCreatePaymentFailBankName(){
+    void testCreatePaymentIsBankFail(){
         Map<String, String> paymentDataBank = new  HashMap<>();
-        paymentDataBank.put("bankName", "");
+        paymentDataBank.put("bankName", "a");
         paymentDataBank.put("referenceCode", "0");
-        assertThrows(IllegalArgumentException.class, ()-> {new Payment("ini-ceritanya-id-1",orders.get(1),
-                "BANK", paymentDataBank);
-        });
-    }
-
-    @Test
-    void testCreatePaymentFailReferenceCode(){
-        Map<String, String> paymentDataBank = new  HashMap<>();
-        paymentDataBank.put("bankName", "lana");
-        paymentDataBank.put("referenceCode", "");
-        assertThrows(IllegalArgumentException.class, ()-> {new Payment("ini-ceritanya-id-1",orders.get(1),
+        assertThrows(IllegalArgumentException.class, ()-> {new Payment("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",orders.get(1),
                 "BANK", paymentDataBank);
         });
     }
