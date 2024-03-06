@@ -41,13 +41,13 @@ public class PaymentRepositoryTest {
         orders.add(order1);
 
         Map<String, String> paymentDataVoucher = new HashMap<>();
-        paymentDataVoucher.put("voucherCode", "ESHOP00000000000");
-        Payment payment1 = new Payment("ini-ceritanya-id-1",orders.get(0),
+        paymentDataVoucher.put("voucherCode", "ESHOP00000000AAA");
+        Payment payment1 = new Payment("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",orders.get(0),
                 "VOUCHER", paymentDataVoucher);
         Map<String, String> paymentDataBank = new  HashMap<>();
-        paymentDataVoucher.put("bankName", "lanabank");
+        paymentDataVoucher.put("bankName", "a");
         paymentDataVoucher.put("referenceCode", "0");
-        Payment payment2 = new Payment("ini-ceritanya-id-2",orders.get(0),
+        Payment payment2 = new Payment("bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa",orders.get(0),
                 "VOUCHER", paymentDataVoucher);
         payments.add(payment1);
         payments.add(payment2);
