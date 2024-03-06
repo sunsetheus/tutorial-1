@@ -78,3 +78,16 @@ Kerugian tidak mengimplementasikan SOLID
 2. Sulit dipahami oleh orang lain karena code menumpuk di satu bagian dengan fungsionalitasnya masing-masing. Dengan tidak adanya pemisahan yang sepsifik, pembaca akan lebih sulit tahu bagian mana melakukan apa, terlihat lebih berantakan, dan lebih lama dalam memahami keseluruhan code.
 
 3. Dengan tidak membuat interface seminimal mungkin, saya harus memgimpelemntasikan fungsi yang tidak benar-benar saya gunakan. Jika saya membuat interface service car yang sangat spesifik (seperti ada fungsi mendapatkan mobil warna kuning, fungsi mencari nama mobil berawalan huruf W, fungsi melakukan penghapusan semua mobil, dsb yang sebenarnya belum tentu akan selalu saya gunakan untuk setiap implementasi service car. Maka akan lebih sulit dalam mengimpleemntasikan interface tersebut karena saya harus override suatu hal yang saya tidak gunakan.
+
+
+
+# MODUL 4
+1. TDD memberikan alur pengerjaan u
+   yang lebih termaintainisasi. Hal ini terlihat dari pembuatan test yang dilakukan lebih dahulu sehingga memastikan semua yang dibuat sesuai dengan yang diinginkan (bukan test yang menyesuaikan implementasi dan "menutupi" kesalahan) tetapi kita yang harus teguh dengan requirement test yang sudah ada. Pembuatan ini yang membuat saya harus memperhatikan semua requirement fitur dengan baik agar test dapat berjalan hijau. Untuk tes ke depannya, saya rasa perlu dibuat test yang mensimulasikan aksi user yang banyak. Hal inj dilakukan karena tes yang dibuat hanya fokus pada 1 kasus.
+
+
+2. Sudah memenuhi prinsip F.I.R.S.T dengan memastikan tes dibuat seefesien mungkin
+- Fast: karena efisien, seharusnya memang berjalan cepat
+- Isolated: Tes berdiri sendiri tidak bergantung pada yang lain
+- Repeatable: Konsisten menghasilkan hasil yang sama (tidak dipengaruh oleh urutan)
+- Self validating: sudah dapat memvalidasi tes dirinya sendirj sehingga mengurangi manualisasi
