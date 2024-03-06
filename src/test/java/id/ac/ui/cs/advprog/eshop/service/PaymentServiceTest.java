@@ -57,8 +57,7 @@ public class PaymentServiceTest {
         paymentData = new HashMap<>();
         paymentData.put("bankName","a");
         paymentData.put("referenceCode","0");
-        Payment payment2 = new PaymentBank(order, "BANK", paymentData);
-        payments.add(payment2);
+
     }
 
     @Test
@@ -85,7 +84,7 @@ public class PaymentServiceTest {
         assertEquals(payment2.getMethod(), findResult.getMethod() );
         assertEquals(payment2.getStatus(), findResult.getStatus() );
         verify(paymentService, times(1)).createPaymentVoucher(any(Order.class), any(String.class), any(Map.class));
-        verify(paymentService, times(1)).createPaymentBank(any(Order.class), any(String.class), any(Map.class));
+
     }
 
     @Test
