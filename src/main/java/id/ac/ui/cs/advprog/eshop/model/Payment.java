@@ -24,13 +24,8 @@ public class Payment {
         this.id = UUID.randomUUID().toString();
         this.method = method;
         this.order = order;
-        try{
-            setPaymentData(paymentData);
-            setStatus(PaymentStatus.SUCCESS.getValue());
-        }catch (IllegalArgumentException e){
-            setStatus(PaymentStatus.REJECTED.getValue());
-            throw new IllegalArgumentException();
-        }
+        this.status=PaymentStatus.WAITING_PAYMENT.getValue();
+        this.setPaymentData(paymentData);
     }
 
     public void setStatus(String status){
@@ -41,25 +36,11 @@ public class Payment {
         }
     }
 
-    private void setPaymentData(Map<String, String>paymentData){
-        if (method.equals(PaymentMethod.VOUCHER.getValue())){
-            int numOfNumerics = 0;
-            for (int i=0; i<paymentData.get("voucherCode").length(); i++){
-                if (Character.isDigit(paymentData.get("voucherCode").charAt(i))){
-                    numOfNumerics+=1;
-                }
-            }
-            if (paymentData.get("voucherCode").length()!=16 ||
-                    !paymentData.get("voucherCode").startsWith("ESHOP") ||
-                    numOfNumerics!=8){
-                throw new IllegalArgumentException();
-            }
-        }else if (method.equals(PaymentMethod.BANK.getValue())){
-            if (paymentData.get("bankName").isBlank() ||
-                    paymentData.get("referenceCode").isBlank()){
-                throw new IllegalArgumentException();
-            }
+    protected void setPaymentData(Map<String, String>paymentData){
+        if(PaymentMethod.contains(this.method)){
+            throw new IllegalArgumentException();
+        }else{
+            this.paymentData = null;
         }
-        this.paymentData = paymentData;
     }
 }
