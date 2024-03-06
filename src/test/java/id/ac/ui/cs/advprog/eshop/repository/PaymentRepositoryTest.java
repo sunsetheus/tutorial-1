@@ -41,7 +41,7 @@ public class PaymentRepositoryTest {
         orders.add(order1);
 
         Map<String, String> paymentDataVoucher = new HashMap<>();
-        paymentDataVoucher.put("voucherCode", "INIKODE");
+        paymentDataVoucher.put("voucherCode", "ESHOP00000000000");
         Payment payment1 = new Payment("ini-ceritanya-id-1",orders.get(0),
                 "VOUCHER", paymentDataVoucher);
         Map<String, String> paymentDataBank = new  HashMap<>();
